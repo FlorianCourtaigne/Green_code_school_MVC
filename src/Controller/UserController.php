@@ -106,6 +106,7 @@ class UserController extends AbstractController
                 $user['password'] = md5($user['password']);
                 // add somes options
                 $user['is_admin'] = false;
+                $user['fridge_used'] = false;
                 // insert and redirection
                 $userManager = new UserManager();
                 $id = $userManager->insert($user);
