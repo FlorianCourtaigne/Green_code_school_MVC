@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Liste des étudiants</h1>
+    <ul>
+        {% for user in users %}
+            <li><a href="/profile?id={{ user.id }}">{{ user.id }}. {{ user.firstname }}</a></li>
+        {% else %}
+            <li>Aucun étudiant trouvé !</li>
+        {% endfor %}
+    </ul>
+    <a href="/users/add">Ajouter</a>
+{% endblock %}
