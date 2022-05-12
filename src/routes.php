@@ -16,7 +16,7 @@ return [
 
     'users' => ['UserController', 'index',],
     'users/edit' => ['UserController', 'edit', ['id']],
-    'users/show' => ['UserController', 'show', ['id']],
-    'users/add' => ['UserController', 'add',],
+    'profil' => ['UserController', 'show', ['id']],
+    'signup' => ['UserController', 'add',],
     'users/delete' => ['UserController', 'delete',],
 ];
