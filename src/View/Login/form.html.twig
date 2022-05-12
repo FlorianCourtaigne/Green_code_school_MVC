@@ -1,0 +1,44 @@
+<!-- LOGIN POPUP -->
+<section class="col-sm-12 col-md-3 collapse rounded-bottom position-absolute secondary-text-color layout-bg-color me-md-5 end-0 mt-5 pt-3" id="login-form">
+	{% if loginErrors|length > 0 %}
+		<div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+			{% for loginError in loginErrors %}
+				{{ loginError }}
+				{% if loginErrors|length > 1 %} <hr /> {% endif %}
+			{% endfor %}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	{% endif %}
+	<div class="container-form m-3">
+		<div class="w-100">
+			<h3 class="mb-4 fs-4 text-center">Connectez-vous</h3>
+		</div>
+		<form method="post" class="signin-form">
+			<div class="form-floating mb-3">
+				<input type="text" class="form-control text-center fs-6 border-hackademy" placeholder="your@email.com" value="" name="email" id="email" required>
+				<label for="email" name="email" class="text-dark">Adresse email</label>
+			</div>
+			<div class="form-floating mb-3">
+				<input type="password" class="form-control text-center fs-6 border-hackademy" value="" placeholder="********" name="password" id="password" required>
+				<label for="password" name="password" class="text-dark">Mot de passe</label>
+			</div>
+			<div>
+				<button type="submit" name="login-submit" class="btn-hackademy btn-primary-hackademy rounded submit w-100">Se connecter</button>
+			</div>
+			<!--<div class="d-md-flex">
+				<div class="w-50 text-left">
+					<label class="checkbox-wrap checkbox-primary mb-0">
+						<input type="checkbox" checked> Se rappeler de moi
+					</label>
+				</div>
+				<div class="w-50 text-md-right">
+					<a href="#">Mot de passe oublié</a>
+				</div>
+			</div>-->
+		</form>	
+		<div class="text-center">
+			<h3 class="mt-5 mb-4 fs-5">Pas encore de compte ?</h3>
+			<a class="btn btn-outline-hackademy rounded mx-auto d-block" role="button" href="/signup">S'inscrire</a>
+		</div>
+	</div>
+</section>
