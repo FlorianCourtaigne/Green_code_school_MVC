@@ -1,0 +1,9 @@
+<div class="container-fluid d-flex justify-content-center mx-auto border-bottom mt-4 py-2" id="navbar_profile">
+    <div class="row f-w-600">
+        <div class="col-auto"><a href="/profile?id={{ session.user.id }}" class="nav-link active show" data-toggle="tab">MES INFOS</a></div>
+        <div class="col-auto"><a href="#profile-about" class="nav-link" data-toggle="tab">MES FORMATIONS</a></div>
+        <div class="col-auto"><a href="#profile-videos" class="nav-link" data-toggle="tab">COMMENTAIRES</a></div>
+        <div class="col-auto"><a href="#profile-friends" class="nav-link" data-toggle="tab">FAVORIS</a></div>
+        <div class="col-auto"><a href="/profile/invoices?id={{ session.user.id }}" class="nav-link" data-toggle="tab">FACTURES</a></div>
+    </div>
+</div>
