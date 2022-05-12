@@ -19,7 +19,6 @@ abstract class AbstractController
 
     public function __construct()
     {
-        session_start();
         $loader = new FilesystemLoader(APP_VIEW_PATH);
         $this->twig = new Environment(
             $loader,

@@ -14,19 +14,13 @@
                             <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
                         </button> 
                         <span class="name mt-3">{{ user.firstname }} {{user.lastname}}</span>
-                        <span class="idd">@{{ user.firstname }}{{user.lastname}}</span> 
-                        <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
-                            <span class="idd1">Oxc4c16a645_b21a</span> 
-                            <span>
-                                <i class="fa fa-copy"></i>
-                            </span> 
-                        </div> 
+                        <span class="idd">{{ user.email }}</span>  
                         <div class="d-flex mt-2"> 
                             <button class="btn btn-dark text-light f-w-bold">Edit Profile</button>
                         </div> 
                         <div class="text mt-3">
-                            <span class="text-italic">
-                                '' {{ user.bio }} ''
+                            <span class="fst-italic">
+                                « {{ user.bio }} »
                             </span> 
                         </div>
                         <div class="row g-4 mt-3 align-items-center">
@@ -51,8 +45,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class=" px-2 rounded mt-4 text-light fw-bold text-center bg-success">
-                            <span class="join">Tu es un Wilder ECO RESPONSABLE depuis le {{ user.registration_date }}</span>
+                        <div class="p-3 rounded mt-4 text-light fw-bold text-center bg-success">
+                            <span class="join text-uppercase">Wilder ECO RESPONSABLE depuis le {{ user.registration_date|format_datetime('long', 'none', locale='fr') }}</span>
                         </div>
                     </div> 
                 </div>
@@ -60,12 +54,56 @@
             <div class="col-8">
                 <div class="card p-4 w-100">
                     <div class="mb-2">
-                        <h2 class="text-success text-uppercase text-center fw-bold fs-3">Tu es étudiant de la promo <br /> {{ user.promo_name }}</h2>
-                        <span class="text-center d-block">DU {{ user.promo_debut|date("d F Y", "Europe/Paris") }} AU {{ user.promo_end|date("d F Y", "Europe/Paris") }}</span>
+                        <h2 class="text-success text-uppercase text-center fw-bold fs-4">Tu es étudiant de la promo <br /> {{ user.promo_name }}</h2>
+                        <span class="text-center d-block">Ta session se déroule du {{ user.promo_debut|format_datetime('long', 'none',locale='fr') }} au {{ user.promo_end|format_datetime('long', 'none', locale='fr') }}</span>
                     </div>
                     <hr>
                     <div>
-                        <h2 class="text-success text-uppercase text-center fw-bold fs-3">Planning des actions écologiques <br /> de la semaine</h2>
+                        <h2 class="text-success text-uppercase text-center fw-bold align-items-center fs-4 pt-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                            Planning des actions écologiques
+                        </h2>
+                        <div class="alert alert-secondary text-justify my-4" role="alert">
+                            Le planning des actions écologique affiche les semaines durant lesquelles, ta promo devra mettre en place les différents mission à caractères écologiques (trie des déchets, vidage du frigo, etc...) pour l'ensemble de ton campus. </br>
+                            Dans un esprit de collaboration, tu peux si tu le souhaites, te joindre à une autre promo de ton campus si c'est à son tour d'etre missionnée.
+                        </div>
+                        <ul class="list-group my-4">
+                            {% for planning in plannings %}
+                                {% set disabled = '' %}
+                                {% set color = 'success' %}
+                                {% set textcolor = 'success' %}
+                                {% set fontweight = 'fw-bold' %}
+                                {% if user.promo_name is not same as(planning.promo_name) %}
+                                    {% set disabled = ' disabled' %}
+                                    {% set color = 'gray' %}
+                                    {% set textcolor = 'secondary' %}
+                                    {% set fontweight = '' %}
+                                {% endif %}
+                                {% if loop.index == 1 %}
+                                    {% set textcolor = 'light' %}
+                                    {% set fontweight = '' %}
+                                    <li class="list-group-item{{ disabled }} align-items-center bg-dark text-light py-3" aria-current="true">
+                                {% else %}
+                                    <li class="list-group-item align-items-center py-3{{ disabled }}">
+                                {% endif %}
+                                    <div class="row g2">
+                                    <div class="col-8 text-{{ textcolor }} {{ fontweight }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-record-circle-fill me-2 text-{{ color }}" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        </svg>
+                                            Semaine du {{ planning.week_start|format_datetime(pattern='d MMMM', locale='fr') }} au {{ planning.week_end|format_datetime('long', 'none', locale='fr') }}
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="badge bg-{{ color }} fs-6 w-100">{{ planning.promo_name }}</span>
+                                    </div>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <p class="text-center">Il n'y a pas d'actions écologiques prévue durant les prochaines semaines</p>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Model\UserManager;
+use App\Controller\PlanningController;
+use App\Model\PlanningManager;
 
 class UserController extends AbstractController
 {
@@ -37,10 +39,16 @@ class UserController extends AbstractController
             }
         }
 
+        $planningController = new PlanningController();
+        $plannings = $planningController->showPlannings();
+
         $userManager = new UserManager();
         $user = $userManager->selectOneById($id);
 
-        return $this->twig->render('User/profile.html.twig', ['user' => $user]);
+        return $this->twig->render('User/profile.html.twig', [
+            'user'      => $user,
+            'plannings' => $plannings,
+        ]);
     }
 
     /**

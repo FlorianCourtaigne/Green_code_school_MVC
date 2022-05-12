@@ -73,3 +73,10 @@ hr .new1 {
 .join {
     font-size: 14px;
 }
+
+.bg-gray {
+    background-color: #ccc;
+}
+.text-gray {
+    color: #ccc;
+}
