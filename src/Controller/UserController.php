@@ -96,6 +96,8 @@ class UserController extends AbstractController
                 // add somes options
                 $user['is_admin'] = false;
                 $user['is_archived'] = false;
+                $user['fridge_used'] = false;
+                $user['promo_id'] = 1;
                 // insert and redirection
                 $userManager = new UserManager();
                 $id = $userManager->insert($user);

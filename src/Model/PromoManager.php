@@ -12,7 +12,7 @@ class UserManager extends AbstractManager
 {
     protected PDO $pdo;
 
-    public const TABLE = 'user';
+    public const TABLE = 'promo';
 
     public function __construct()
     {
@@ -36,7 +36,7 @@ class UserManager extends AbstractManager
     /**
      * Get one row from database by ID.
      */
-    public function selectOneById(int $id): array|false
+    public function selectOnePromoId(int $id): array|false
     {
         // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
@@ -47,23 +47,9 @@ class UserManager extends AbstractManager
     }
 
     /**
-     * Get one row from database by email and password to login the user.
-     */
-    public function selectOneUser(string $email, string $password): array|false
-    {
-        // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE email=:email AND pswd=:password");
-        $statement->bindValue('email', $email, \PDO::PARAM_STR);
-        $statement->bindValue('password', $password, \PDO::PARAM_STR);
-        $statement->execute();
-
-        return $statement->fetch();
-    }
-
-    /**
      * Delete row form an ID
      */
-    public function delete(int $id): void
+    public function deletePromo(int $id): void
     {
         // prepared request
         $statement = $this->pdo->prepare("DELETE FROM " . static::TABLE . " WHERE id=:id");
@@ -74,19 +60,17 @@ class UserManager extends AbstractManager
     /**
      * Insert new item in database
      */
-    public function insert(array $user): int
+    public function insertPromo(array $user): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
-            (firstname, lastname, email, pswd, bio, is_admin, fridge_used, promo_id) 
-            VALUES (:firstname, :lastname, :email, :pswd, :bio, :is_admin, :fridge_used, :promo_id)");
+            (firstname, lastname, email, pswd, is_admin, fridge_used) 
+            VALUES (:firstname, :lastname, :email, :pswd, :is_admin, :fridge_used)");
         $statement->bindValue('firstname', $user['firstname'], \PDO::PARAM_STR);
         $statement->bindValue('lastname', $user['lastname'], \PDO::PARAM_STR);
         $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
         $statement->bindValue('pswd', $user['password'], \PDO::PARAM_STR);
-        $statement->bindValue('bio', $user['bio'], \PDO::PARAM_INT);
         $statement->bindValue('is_admin', $user['is_admin'], \PDO::PARAM_BOOL);
         $statement->bindValue('fridge_used', $user['fridge_used'], \PDO::PARAM_BOOL);
-        $statement->bindValue('promo_id', $user['promo_id'], \PDO::PARAM_INT);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();

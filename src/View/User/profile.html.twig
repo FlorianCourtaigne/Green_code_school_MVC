@@ -1,9 +1,63 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    {% include 'User/_navbar_profile.html.twig' %}
+    {# {% include 'User/_navbar_profile.html.twig' %} #}
 
-    <h1 class="text-center mt-2 pt-4 main-text-color">Informations de l'étudiant </h1>
+    <h1 class="text-center mt-2 pt-4 main-text-color">Informations de l'étudiant</h1>
+<div class="container justify-content-center">
+    <div class="col-4 mt-4 mb-4 p-3 d-flex "> 
+        <div class="card p-4">
+            <div class=" image d-flex flex-column justify-content-center align-items-center">
+                <button class="btn btn-secondary">
+                    <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+                </button> 
+                <span class="name mt-3">{{ user.firstname }} {{user.lastname}}</span>
+                <span class="idd">@{{ user.firstname }}{{user.lastname}}</span> 
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+                    <span class="idd1">Oxc4c16a645_b21a</span> 
+                    <span>
+                        <i class="fa fa-copy"></i>
+                    </span> 
+                </div> 
+                <div class=" d-flex mt-2"> 
+                    <button class="btn1 btn-dark">Edit Profile</button>
+                </div> 
+                <div class="text mt-3">
+                    <span class="text-italic">
+                        '' {{ user.bio }} ''
+                    </span> 
+                </div>
+                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                    <span>
+                        <i class="fa fa-twitter"></i>
+                    </span> 
+                    <span>
+                        <i class="fa fa-facebook-f"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-instagram"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-linkedin"></i>
+                    </span>
+                </div>
+                <div class=" px-2 rounded mt-4 text-light fw-bold text-center bg-success">
+                    <span class="join">Tu es un Wilder ECO RESPONSABLE depuis le {{ user.registration_date }}</span>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="col-8">
+        {{ user.promo_name }}
+    </div>
+</div>
+
+
+
+
+
+
+
 
     <div id="page-content">
         <div class="padding">
