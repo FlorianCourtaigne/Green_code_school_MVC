@@ -23,7 +23,7 @@ body {
     transform: scale(1.5)
 }
 
-.btn {
+.btn-rounded {
     height: 140px;
     width: 140px;
     border-radius: 50%
@@ -54,17 +54,8 @@ body {
     color: #444444
 }
 
-.btn1 {
-    height: 40px;
-    width: 150px;
-    border: none;
-    background-color: #000;
-    color: #aeaeae;
-    font-size: 15px
-}
-
 .text span {
-    font-size: 13px;
+    font-size: 1rem;
     color: #545454;
     font-weight: 500
 }
@@ -79,8 +70,4 @@ hr .new1 {
 
 .join {
     font-size: 14px;
-}
-
-.date {
-    background-color: #ccc
 }

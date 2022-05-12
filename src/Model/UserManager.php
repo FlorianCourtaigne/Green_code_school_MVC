@@ -39,7 +39,12 @@ class UserManager extends AbstractManager
     public function selectOneById(int $id): array|false
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
+        $statement = $this->pdo->prepare("SELECT u.firstname, u.lastname, u.email, u.bio, u.registration_date, 
+            p.id, p.title as promo_name, p.date_start as promo_debut, p.date_end as promo_end 
+            FROM " . static::TABLE . " AS u 
+            JOIN promo AS p ON p.id = u.promo_id
+            WHERE u.id=:id
+        ");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
