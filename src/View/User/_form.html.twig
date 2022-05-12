@@ -1,0 +1,62 @@
+{% if errors|length > 0 %}
+	<div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+		{% for error in errors %}
+			{{ error }}
+			{% if errors|length > 1 %} <hr /> {% endif %}
+		{% endfor %}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+{% endif %}
+
+<section class="w-100" id="signup-form">
+	<div class="row justify-content-center">
+		<div class="col-md-12 col-lg-10">
+			<div class="wrap mx-auto">
+				<div class="login-wrap p-4 p-md-5">
+					<div class="d-flex">
+						<div class="w-100">
+							<h3 class="mb-4 text-center">Inscrivez-vous maintenant !</h3>
+						</div>
+					</div>
+					<div class="alert alert-primary" role="alert">
+						Tous les champs marqués d'un astérix (*) sont requis.
+					</div>
+					<form method="post" class="signin-form">
+						<input type="hidden" value="{{ user.id }}" name="id">
+						<div class="form-group mb-3 d-flex">
+							<div class="w-50 me-1">
+								<label for="firstname" name="firstname">Prénom *</label>
+								<input type="text" class="form-control" value="{{ user.firstname }}" name="firstname" id="firstname" required>
+							</div>
+							<div class="w-50 ms-1">
+								<label for="lastname" name="lastname">Nom *</label>
+								<input type="text" class="form-control" value="{{ user.lastname }}" name="lastname" id="lastname" required>
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<label for="email" name="email">E-mail *</label>
+							<input type="text" class="form-control" value="{{ user.email }}" name="email" id="email" required>
+						</div>
+						<div class="form-group mb-3 d-flex">
+							<div class="w-50 me-1">
+								<label for="password" name="password">Mot de passe *</label>
+								<input type="password" class="form-control" value="" name="password" id="password" required>
+							</div>
+							<div class="w-50 ms-1">
+								<label for="password2" name="password2">Confirmez le mot de passe *</label>
+								<input type="password" class="form-control" value="" name="password2" id="password2" required>
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<label for="address" name="address">Adresse postale</label>
+							<textarea class="form-control" name="address" id="address">{{ user.address }}</textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary rounded submit mx-auto d-block px-5">Inscription</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

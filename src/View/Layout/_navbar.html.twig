@@ -1,0 +1,27 @@
+<nav>
+    <ul>
+        {% if session.user %} 
+            <a href="/profile?id={{ session.user.id }}"><li class="mt-1">Profil</li></a>
+            <a href="/logout"><li class="mt-1 mb-1">Logout</li></a>
+            {% endif %}
+            {% if session.user is null %}
+            <li class="list-inline-item" role="button" href="#login-form" data-bs-toggle="collapse" aria-expanded="false" aria-controls="login-form">
+            {% if session.user %}
+                <a href="/profile?id={{ session.user.id }}"><img class="header layout-icon-color" src="/assets/images/person-circle.svg"/></a>
+            {% else %}
+                <button class="secondary-text-color layout-bg-color border-0 mb-2">
+                Login
+                </button>
+            {% endif %}
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% if session.user %}
+  <div class="logout-btn bg-dark position-absolute rounded-bottom text-light me-4 pt-2 pb-2 ps-3 d-none d-md-block" id="logged-user">
+    {{ session.user.firstname }} | <a href="/logout" class="unlog-btn link-primary">Déconnexion</a>
+  </div>
+{% else %}
+  {% include 'Login/form.html.twig' %}
+{% endif %}
