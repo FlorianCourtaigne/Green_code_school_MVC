@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <form action = "/recyclespots" method="post">
+        <label for="title">Arrondissement</label>
+        <input type="text" value="" name="district" id="district">
+        <button>Submit</button>
+    </form>
+    <div style="height : 20rem;" class="">
+        {% for arrondissement in arrondissements %}
+        <iframe class="w-100 h-100"  src="https://opendata.paris.fr/explore/embed/dataset/dechets-menagers-points-dapport-volontaire-stations-trilib/map/?disjunctive.code_postal&disjunctive.etat&refine.code_postal={{arrondissements}}&basemap=jawg.dark&location=13,48.87838,2.42188&static=false&datasetcard=false&scrollWheelZoom=false" frameborder="0"></iframe>
+        {% endfor %}
+    </div>
+    <div class="row col-12">
+        {% for record in spots.records %}
+            <p class="col-6">{{ record.fields.adresse }} {{ record.fields.code_postal }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

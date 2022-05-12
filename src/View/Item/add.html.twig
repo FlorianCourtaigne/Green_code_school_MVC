@@ -3,4 +3,9 @@
 {% block content %}
     <h1>Add a new item</h1>
     {% include 'Item/_form.html.twig' %}
+    <div>
+        {% for record in spots.records %}
+            <p>{{ record.fields.adresse }}</p>
+        {% endfor %}
+    </div>
 {% endblock %}
