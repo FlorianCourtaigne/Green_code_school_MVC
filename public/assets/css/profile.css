@@ -60,8 +60,10 @@ body {
     font-weight: 500
 }
 
-.icons i {
-    font-size: 19px
+.icon {
+    height: 1.2rem;
+    width: 1.2rem;
+
 }
 
 hr .new1 {
