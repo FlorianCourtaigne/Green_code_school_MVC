@@ -14,5 +14,15 @@ return [
     'items/add' => ['ItemController', 'add',],
     'items/delete' => ['ItemController', 'delete',],
 
+
     'recyclespots' => ['RecycleSpotsController', 'getRecycle']
+
+    'users' => ['UserController', 'index',],
+    'users/edit' => ['UserController', 'edit', ['id']],
+    'profile' => ['UserController', 'show', ['id']],
+    'signup' => ['UserController', 'add',],
+    'users/delete' => ['UserController', 'delete',],
+
+    'logout' => ['HomeController', 'logout',],
+
 ];
