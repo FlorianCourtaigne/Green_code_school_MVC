@@ -1,13 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
-    <img  class="btn me-5" id="image-home" src="/assets/images/Logo.png"  height="98">
+    <a href="/"><img  class="btn me-5" id="image-home" src="/assets/images/Logo.png"  height="98"></a>
       <div class="navbar text-align-center" id="nav">
         <a class="nav-link text-success ms-5" href="#">Discussion</a>
-        <a class="nav-link text-success" href="#">profil</a>
-        <a class="nav-link text-success" href="#">Point de collecte</a>
+        {% if session.user %} 
+          <a href="/profile?id={{ session.user.id }}"><li class="nav-link text-success">Profil</li></a>
+        {% endif %}
+        <a class="nav-link text-success" href="/recyclespots">Point de collecte</a>
       </div>
       <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-success me-2">Login</button>
+              {% if session.user is null %}
+              <li class="list-inline-item" role="button" href="#login-form" data-bs-toggle="collapse" aria-expanded="false" aria-controls="login-form">
+              {% if session.user %}
+                  <a href="/profile?id={{ session.user.id }}"><img class="header layout-icon-color" src="/assets/images/person-circle.svg"/></a>
+              {% else %}
+                  <button class="btn btn-outline-success me-2">
+                  Login
+                  </button>
+              {% endif %}
+              </li>
+          {% endif %}
+          {% if session.user is null %} 
+            <a href="/signup"><button type="button" class="btn btn-outline-success me-2">Sign up</button></a>
+          {% endif %}
+        {% if session.user %} 
+          <a href="/logout"><li class="btn btn-outline-success me-2">Logout</li></a>
+      {% endif %}
       </div>
   </div>
 </nav>
+{% if session.user %}
+{% else %}
+  {% include 'Login/form.html.twig' %}
+{% endif %}

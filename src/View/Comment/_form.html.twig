@@ -2,8 +2,7 @@
 	<input type="hidden" value="{{ comment.id }}" name="id">
 	<label for="comment">Commentaire</label>
 	<input type="text" value="{{ comment.comment }}" name="comment" id="comment">
-	<input type="hidden" value='1' name="user_id" id="user_id">
-	<input type="hidden" value='1' name="training_id" id="training_id">
+	<input type="hidden" value='2' name="user_id" id="user_id">
 	{% for error in errors %}
     	<p>{{error}}</p>
 	{% endfor %}

@@ -2,5 +2,64 @@
 
 {% block content %}
     <h1>Ajouter un commentaire</h1>
-    {% include 'Comment/_form.html.twig' %}
+    {# {% include 'Comment/_form.html.twig' %} #}
+    <form method="post">
+        <input type="hidden" value="{{ comment.id }}" name="id">
+        <label for="comment">Commentaire</label>
+        <input type="text" value="{{ comment.comment }}" name="comment" id="comment">
+        <input type="hidden" value='2' name="user_id" id="user_id">
+        {% for error in errors %}
+            <p>{{error}}</p>
+        {% endfor %}
+        <button>Ajouter/modifier un commentaire</button>
+    </form>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-md-6 col-lg-7 col-xl-8">
+              <ul class="list-unstyled">
+                <li class="d-flex justify-content-between mb-4">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                    class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+                  <div class="card">
+                    <div class="card-header d-flex justify-content-between p-3">
+                      <p class="fw-bold mb-0">Brad Pitt</p>
+                      <p class="text-muted small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
+                    </div>
+                    <div class="card-body">
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li class="d-flex justify-content-between mb-4">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                    class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+                  <div class="card">
+                    <div class="card-header d-flex justify-content-between p-3">
+                      <p class="fw-bold mb-0">Brad Pitt</p>
+                      <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10 mins ago</p>
+                    </div>
+                    <div class="card-body">
+                      <p class="mb-0">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+      
+                <li class="col-lg-12 bg-white mb-3">
+                  <div class="form-outline">
+                    <textarea class="form-control align-self-end" id="textAreaExample2" rows="4"></textarea>
+                  </div>
+                </li>
+                <button type="button"  href="#" class="btn btn-info btn-rounded float-end">Envoyer</button>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 {% endblock %}
