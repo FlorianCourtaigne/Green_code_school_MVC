@@ -8,6 +8,7 @@ body{
 
 #home{
     background-color: #c9e265;
+
 }
 
 #image-home{
@@ -17,6 +18,10 @@ body{
 .card-text{
 color: #897268; 
 font-family: 'Rubik', sans-serif;
+}
+
+#couper{
+    margin-top: -3rem;
 }
 
 .projcard-container {
