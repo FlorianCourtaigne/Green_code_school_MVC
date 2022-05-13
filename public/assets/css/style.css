@@ -1,40 +1,60 @@
 body{
+    background-color: #eee;
+}
+.navbar{
+    background-color: #ffff;
+
+}
+
+#home{
     background-color: #c9e265;
 }
 
+#image-home{
+    margin-bottom: -2rem;
+}
+
 .card-text{
-    background-color: #c9e265;
+color: #897268; 
+font-family: 'Rubik', sans-serif;
 }
 
 .projcard-container {
 	margin-left: auto;
 	margin-right: auto;
-	width: 1500px;
+	width: 1200px;
 }
 .projcard {
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 320px;
     border-radius: 10px;
+    margin-left: auto;
+	margin-right: auto;
     border: 2px solid #ddd;
     font-size: 18px;
     overflow: hidden;
     box-shadow: 0 4px 21px -12px rgba(0, 0, 0, .66);
-}
 
-.projcard-innerbox {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 }
 
 .projcard-img {
     position: absolute;
-    height: 350px;
     width: 100%;
+    height: 320px;
     top: 0;
     left: 0;
 }
+
+.projcard-imgage {
+    position: absolute;
+    width: 100%;
+    height: 340px;
+    top: 0;
+    left: 0;
+}
+
+  .page-footer{
+    background-color: #ffff;
+  }
     
