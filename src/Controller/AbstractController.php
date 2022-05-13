@@ -58,7 +58,7 @@ abstract class AbstractController
                         'lastname' => $user['lastname'],
                         'is_admin' => $user['is_admin']
                     ];
-                    header('Location: /');
+                    header('Location: /profile?id=' . $user['id']);
                 } else {
                     $this->loginErrors[] = "Vos données de connexion ne correspondent à aucun utilisateur enregistré";
                 }
@@ -115,10 +115,10 @@ abstract class AbstractController
             $currentSlug = explode('/', $_SERVER['PATH_INFO']);
             // Check if the slug match one of theses protected route
             if (
-                in_array('add', $currentSlug) ||
-                in_array('edit', $currentSlug) ||
-                in_array('delete', $currentSlug) ||
-                in_array('users', $currentSlug)
+                //in_array('add', $currentSlug) ||
+                //in_array('edit', $currentSlug) ||
+                in_array('delete', $currentSlug) //||
+                //in_array('users', $currentSlug)
             ) {
                 if (!$this->isAdmin()) {
                     header('Location: /');

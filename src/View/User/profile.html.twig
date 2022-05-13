@@ -3,8 +3,12 @@
 {% block content %}
     {# {% include 'User/_navbar_profile.html.twig' %} #}
 
-    <h1 class="text-center mt-2 pt-4 main-text-color">Informations de l'étudiant</h1>
-
+    {% if user.fridge_updated %}
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{ user.fridge_updated }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
     <div class="container justify-content-center my-5">
         <div class="row">
             <div class="col-4"> 
@@ -16,7 +20,7 @@
                         <span class="name mt-3">{{ user.firstname }} {{user.lastname}}</span>
                         <span class="idd">{{ user.email }}</span>  
                         <div class="d-flex mt-2"> 
-                            <button class="btn btn-dark text-light f-w-bold">Edit Profile</button>
+                            <a href="/users/edit?id={{ user.id }}" class="btn btn-dark text-light f-w-bold">Edit Profile</a>
                         </div> 
                         <div class="text mt-3">
                             <span class="fst-italic">
@@ -55,14 +59,36 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="card p-4 w-100 mb-4">
-                    <div class="mb-2">
-                        <h2 class="text-success text-uppercase text-center fw-bold fs-4">Tu es étudiant de la promo <br /> {{ user.promo_name }}</h2>
-                        <span class="text-center d-block">Ta session se déroule du {{ user.promo_debut|format_datetime('long', 'none',locale='fr') }} au {{ user.promo_end|format_datetime('long', 'none', locale='fr') }}</span>
+                <div class="card pt-3 w-100 mb-4">
+                    <div class="row mb-2">
+                        <h2 class="text-success text-uppercase text-center fw-bold fs-6">Tu es inscrits dans la promo {{ user.promo_name }}</h2>
+                        <span class="text-center d-block fs-6">
+                            Session {{ user.promo_debut|format_datetime('long', 'none',locale='fr') }} 
+                            au {{ user.promo_end|format_datetime('long', 'none', locale='fr') }}
+                        </span>
+                    </div>
+                </div>
+                <div class="card py-2 w-100 mb-4">
+                    <h6 class="text-success text-uppercase text-center fw-bold">Etat du frigo et stockage à durée limitée de vos aliments</h6>
+                    <div class="form-check form-switch">
+                        <div class="text-center">
+                            <form id="fridgeCheck" method="POST">
+                                {% set statusCheck = '<input class="form-check-input float-none" type="checkbox" role="switch" name="fridge_used" id="flexSwitchCheckDefault fridge">' %}
+                                {% set labelStatusCheck = 'flexSwitchCheckDefault' %}
+                                {% if user.fridge_used == 1 %}
+                                    {% set statusCheck = '<input class="form-check-input float-none" type="checkbox" role="switch" name="fridge_used" id="flexSwitchCheckChecked fridge" checked>' %}
+                                    {% set labelStatusCheck = 'flexSwitchCheckChecked' %}
+                                {% endif %}
+                                {{ statusCheck|raw }}
+                                <label class="form-check-label" for="{{ labelStatusCheck }}">Avez-vous actuellement de la nourriture dans le frigo ?</label>
+                                <input type="hidden" name="id" value="{{user.id}}">
+                                <button type="submit" name="changeFridgeValue" class="btn btn-primary">Valider</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="card p-4 w-100">
-                    <h2 class="text-success text-uppercase text-center fw-bold align-items-center fs-4 pt-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                    <h2 class="text-success text-uppercase text-center fw-bold align-items-center fs-5 pt-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
                         <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
                             <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                         </svg>
@@ -92,15 +118,26 @@
                                 <li class="list-group-item align-items-center py-3{{ disabled }}">
                             {% endif %}
                                 <div class="row g2">
-                                <div class="col-8 text-{{ textcolor }} {{ fontweight }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-record-circle-fill me-2 text-{{ color }}" viewBox="0 0 16 16">
-                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                    </svg>
-                                        Semaine du {{ planning.week_start|format_datetime(pattern='d MMMM', locale='fr') }} au {{ planning.week_end|format_datetime('long', 'none', locale='fr') }}
-                                </div>
-                                <div class="col-4">
-                                    <span class="badge bg-{{ color }} fs-6 w-100">{{ planning.promo_name }}</span>
-                                </div>
+                                    <div class="col-7 text-{{ textcolor }} {{ fontweight }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-record-circle-fill me-2 text-{{ color }}" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                        </svg>
+                                            Semaine du {{ planning.week_start|format_datetime(pattern='d MMM', locale='fr') }} au {{ planning.week_end|format_datetime('medium', 'none', locale='fr') }}
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="row g-2">
+                                            <div class="col-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-recycle fw-bold text-{{ color }}" viewBox="0 0 16 16">
+                                                    <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242-2.532-4.431zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24l2.552-4.467zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.498.498 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244l-1.716-3.004z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="col">
+                                                <span class="badge bg-{{ color }} fs-6 w-100">
+                                                    {{ planning.promo_name }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                         {% else %}

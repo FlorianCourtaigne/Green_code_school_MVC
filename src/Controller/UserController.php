@@ -39,11 +39,25 @@ class UserController extends AbstractController
             }
         }
 
-        $planningController = new PlanningController();
-        $plannings = $planningController->showPlannings();
-
         $userManager = new UserManager();
         $user = $userManager->selectOneById($id);
+
+        // If the user has something in the fridge
+        if (isset($_POST['changeFridgeValue'])) {
+            $user['id'] = $id;
+            if (isset($_POST['fridge_used'])) {
+                $user["fridge_used"] = 1;
+                $user["fridge_updated"] = "Merci. Vous avez déclaré que vous avez encore de la 
+                nourriture dans le frigo ! Vous recevrez une notification vendredi pour vider le frigo.";
+            } else {
+                $user["fridge_used"] = 0;
+                $user["fridge_updated"] = "Merci. Vous avez déclaré que vous n'avez plus rien dans le frigo !";
+            }
+            $userManager->updateFridgeStatus($user);
+        }
+
+        $planningController = new PlanningController();
+        $plannings = $planningController->showPlannings();
 
         return $this->twig->render('User/profile.html.twig', [
             'user'      => $user,
@@ -81,7 +95,7 @@ class UserController extends AbstractController
             }
         }
 
-        $user['is_admin'] = ($user['is_admin'] === 0) ? 'Etudiant' : 'Admin';
+        //$user['is_admin'] = ($user['is_admin'] === 0) ? 'Etudiant' : 'Admin';
         return $this->twig->render('User/edit.html.twig', [
             'user' => $user,
             'errors' => $errors,
