@@ -21,4 +21,12 @@ return [
     'users/delete' => ['UserController', 'delete',],
 
     'logout' => ['HomeController', 'logout',],
+
+    'recyclespots' => ['RecycleSpotsController', 'getRecycle'],
+
+    'comments' => ['CommentController', 'index',],
+    'comments/show' => ['CommentController', 'show', ['id']],
+    'comments/add' => ['CommentController', 'add',],
+    'comments/edit' => ['CommentController', 'edit', ['id']],
+    'comments/delete' => ['CommentController', 'delete',]
 ];

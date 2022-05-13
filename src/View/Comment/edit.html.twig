@@ -1,0 +1,7 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Edition du commentaire</h1>
+    {% include 'Comment/_form.html.twig' %}
+    <a href="/comments/show?id={{ comment.id }}">Back</a>
+{% endblock %}
