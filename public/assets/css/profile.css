@@ -7,6 +7,10 @@ body {
     background-color: #CCC
 }
 
+.powr-chat {
+    z-index: 100;
+}
+
 .card {
     width: 350px;
     background-color: #efefef;

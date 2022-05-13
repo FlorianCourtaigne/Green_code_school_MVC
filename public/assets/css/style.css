@@ -3,7 +3,7 @@ body{
 }
 .navbar{
     background-color: #ffff;
-
+    z-index:99;
 }
 
 #home{
