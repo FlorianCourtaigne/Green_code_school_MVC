@@ -19,7 +19,6 @@ abstract class AbstractController
 
     public function __construct()
     {
-        session_start();
         $loader = new FilesystemLoader(APP_VIEW_PATH);
         $this->twig = new Environment(
             $loader,
@@ -59,7 +58,7 @@ abstract class AbstractController
                         'lastname' => $user['lastname'],
                         'is_admin' => $user['is_admin']
                     ];
-                    header('Location: /');
+                    header('Location: /profile?id=' . $user['id']);
                 } else {
                     $this->loginErrors[] = "Vos données de connexion ne correspondent à aucun utilisateur enregistré";
                 }
@@ -111,21 +110,21 @@ abstract class AbstractController
     // Check if a route is reserved to user with admin as role
     private function routePermission()
     {
-        // if (isset($_SERVER['PATH_INFO'])) {
-        //     // Slug of the current page
-        //     $currentSlug = explode('/', $_SERVER['PATH_INFO']);
-        //     // Check if the slug match one of theses protected route
-        //     if (
-        //         in_array('add', $currentSlug) ||
-        //         in_array('edit', $currentSlug) ||
-        //         in_array('delete', $currentSlug) ||
-        //         in_array('users', $currentSlug)
-        //     ) {
-        //         if (!$this->isAdmin()) {
-        //             header('Location: /');
-        //             return null;
-        //         }
-        //     }
-        // }
+        if (isset($_SERVER['PATH_INFO'])) {
+            // Slug of the current page
+            $currentSlug = explode('/', $_SERVER['PATH_INFO']);
+            // Check if the slug match one of theses protected route
+            if (
+                //in_array('add', $currentSlug) ||
+                //in_array('edit', $currentSlug) ||
+                in_array('delete', $currentSlug) //||
+                //in_array('users', $currentSlug)
+            ) {
+                if (!$this->isAdmin()) {
+                    header('Location: /');
+                    return null;
+                }
+            }
+        }
     }
 }
