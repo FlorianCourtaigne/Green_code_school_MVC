@@ -111,21 +111,21 @@ abstract class AbstractController
     // Check if a route is reserved to user with admin as role
     private function routePermission()
     {
-        if (isset($_SERVER['PATH_INFO'])) {
-            // Slug of the current page
-            $currentSlug = explode('/', $_SERVER['PATH_INFO']);
-            // Check if the slug match one of theses protected route
-            if (
-                in_array('add', $currentSlug) ||
-                in_array('edit', $currentSlug) ||
-                in_array('delete', $currentSlug) ||
-                in_array('users', $currentSlug)
-            ) {
-                if (!$this->isAdmin()) {
-                    header('Location: /');
-                    return null;
-                }
-            }
-        }
+        // if (isset($_SERVER['PATH_INFO'])) {
+        //     // Slug of the current page
+        //     $currentSlug = explode('/', $_SERVER['PATH_INFO']);
+        //     // Check if the slug match one of theses protected route
+        //     if (
+        //         in_array('add', $currentSlug) ||
+        //         in_array('edit', $currentSlug) ||
+        //         in_array('delete', $currentSlug) ||
+        //         in_array('users', $currentSlug)
+        //     ) {
+        //         if (!$this->isAdmin()) {
+        //             header('Location: /');
+        //             return null;
+        //         }
+        //     }
+        // }
     }
 }

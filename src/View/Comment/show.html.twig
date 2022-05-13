@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Informations du commentaire : {{ comment.comment }}</h1>
+    <p>{{ comment.id }}. {{ comment.comment }}</p>
+    <p>{{ comment.id }}. {{ comment.created_at|date('d/m/Y') }}</p>
+    <a href="/comments/edit?id={{ comment.id }}">Edit</a>
+    <form action="/comments/delete" method="POST">
+        <input type="hidden" name="id" value="{{ comment.id }}">
+        <button>Delete</button>
+    </form>
+    <a href="/comments">Back</a>
+{% endblock %}

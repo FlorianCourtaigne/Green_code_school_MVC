@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Liste des commentaires</h1>
+    <ul>
+        {% for comment in comments %}
+            <li><a href="/comments/show?id={{ comment.id }}">{{ comment.id }} </a>. {{ comment.comment }} </li>
+        {% else %}
+            <li>Aucun commentaire trouvé !</li>
+        {% endfor %}
+    </ul>
+    <a href="/comments/add">Ajouter un commentaire</a>
+{% endblock %}
