@@ -21,4 +21,6 @@ return [
     'users/delete' => ['UserController', 'delete',],
 
     'logout' => ['HomeController', 'logout',],
+
+    'recyclespots' => ['RecycleSpotsController', 'getRecycle']
 ];
