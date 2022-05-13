@@ -89,7 +89,7 @@ class UserManager extends AbstractManager
         $statement->bindValue('lastname', $user['lastname'], \PDO::PARAM_STR);
         $statement->bindValue('email', $user['email'], \PDO::PARAM_STR);
         $statement->bindValue('pswd', $user['password'], \PDO::PARAM_STR);
-        $statement->bindValue('bio', $user['bio'], \PDO::PARAM_INT);
+        $statement->bindValue('bio', $user['bio'], \PDO::PARAM_STR);
         $statement->bindValue('is_admin', $user['is_admin'], \PDO::PARAM_BOOL);
         $statement->bindValue('fridge_used', $user['fridge_used'], \PDO::PARAM_BOOL);
         $statement->bindValue('promo_id', $user['promo_id'], \PDO::PARAM_INT);

@@ -25,6 +25,7 @@ CREATE TABLE user (
 
 CREATE TABLE planning (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    week INT,
     date_start DATE,
     date_end DATE
 );
